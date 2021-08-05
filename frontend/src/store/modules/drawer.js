@@ -1,8 +1,11 @@
 const state = {
   drawer: false,
   items: [
-    { title: 'Dashboard', icon: 'mdi-view-dashboard'},
-    { title: 'GridSystem', icon: 'mdi-image'},
+    { title: 'Home', icon: 'mdi-view-dashboard', to: '/'},
+    { title: 'T&A', icon: 'mdi-image', items:[
+      { title: 'Home', icon: 'mdi-view-dashboard', to: '/header'},
+      { title: 'Home', icon: 'mdi-view-dashboard', to: '/header'},
+    ]},
   ]
 
 }
