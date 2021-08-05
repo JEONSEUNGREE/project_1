@@ -1,5 +1,5 @@
-import navdrawer from './navdrawer'
+import drawer from './drawer.js'
 
 export default {
-  navdrawer
+  drawer
 }

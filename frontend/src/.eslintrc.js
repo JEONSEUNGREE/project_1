@@ -1,5 +1,9 @@
 // .eslintrc.js
 module.exports = {
+  // 비동기처리 문법오류 방지
+  parserOptions : {
+    parser: 'babel-eslint',
+  },
   extends: [
     'plugin:vue/recommended',
   ],
