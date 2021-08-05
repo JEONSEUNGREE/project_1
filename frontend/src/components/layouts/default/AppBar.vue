@@ -11,7 +11,6 @@
     >
       <v-app-bar-nav-icon @click="drawer = !drawer" />
       <span class="mr-2">Latest Release</span>
-      <v-icon>mdi-open-in-new</v-icon>
     </v-app-bar>
   </v-card>
 </template>
