@@ -24,6 +24,7 @@
 <script>
 import UserInformation from './UserInfor.vue'
 export default {
+  name: "UserIdentity",
   components: {
     UserInformation
   },
