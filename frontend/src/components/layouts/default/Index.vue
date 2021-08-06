@@ -18,7 +18,7 @@ export default {
   components: {
     AppBar,
     NavDrawer,
-    DefaultView
+    DefaultView,
   },
   data: () => ({
   }),

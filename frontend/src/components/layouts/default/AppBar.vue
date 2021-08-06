@@ -1,23 +1,45 @@
 <template>
-  <v-card
-    height="400"
-    width="256"
-    class="mx-auto"
+  <v-app-bar
+    app
+    color="primary"
+    dark
+    flat
   >
-    <v-app-bar
+    <v-app-bar-nav-icon
       app
-      color="primary"
-      dark
+      @click="drawer = !drawer"
+    />
+    <v-toolbar-title
+      class="text-uppercase black--text"
     >
-      <v-app-bar-nav-icon @click="drawer = !drawer" />
-      <span class="mr-2">Latest Release</span>
-    </v-app-bar>
-  </v-card>
+      <span
+        class="font-weight-light"
+      >Work
+      </span>
+      <span class="font-weight-bold">
+        Space
+      </span>
+    </v-toolbar-title>
+    <v-spacer />
+    <v-btn
+      icon
+      color="white"
+      class="ml-1"
+    >
+      <v-icon>mdi-calendar-month</v-icon>
+    </v-btn>
+    <identity app />
+  </v-app-bar>
 </template>
 
 <script>
+import Identity from './Identity/Identity.vue'
+
 export default {
   name: "AppBar",
+  components: {
+    Identity
+  },
   computed: {
     drawer: {
       get () {

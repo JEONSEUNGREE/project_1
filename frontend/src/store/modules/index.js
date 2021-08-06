@@ -1,5 +1,7 @@
-import drawer from './drawer.js'
+import drawer from './drawer'
+import userInfor from './userInfor'
 
 export default {
-  drawer
+  drawer,
+  userInfor
 }
