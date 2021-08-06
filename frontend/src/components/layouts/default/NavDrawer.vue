@@ -2,7 +2,6 @@
   <v-navigation-drawer
     v-model="drawer"
     app
-    v-bind="$attrs"
     v-on="$listeners"
   >
     <nav-header />
@@ -28,9 +27,8 @@ export default {
         return this.$store.getters['drawer/getDrawer']
       },
       set (value) {
-        return this.$store.commit('drawer/setDrawer', value)
+        return this.$store.dispatch('drawer/toggleDrawer', value)
       }
-
     },
   }
 }

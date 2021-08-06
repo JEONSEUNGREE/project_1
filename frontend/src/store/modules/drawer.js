@@ -11,7 +11,7 @@ const state = {
       { title: 'Organization Chart', icon: 'mdi-view-dashboard', to: '/orga'},
       { title: 'Employee Contact List', icon: 'mdi-view-dashboard', to: '/list'}
     ]},
-    { title: 'Board', icon: 'mdi-view-dashboard', to: '/list'}
+    { title: 'Board', icon: 'mdi-view-dashboard', to: '/board'}
   ]
 
 }
@@ -21,14 +21,14 @@ const getters = {
 
 }
 const mutations  = {
-  setDrawer (state, data) {
+  SET_DRAWER (state, data) {
     state.drawer = data
   }
 
 }
 const actions = {
-  toggleDrawer ({commit}, value) {
-    commit('setDrawer', value)
+  toggleDrawer ({ commit }, value) {
+    commit('SET_DRAWER', value)
   }
 
 }
