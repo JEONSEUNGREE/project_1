@@ -18,6 +18,11 @@ const routes = [
         path: "/board",
         name: 'Board',
         component: () =>import('../views/Board')
+      },
+      {
+        path: "/contact-list",
+        name: 'ContactList',
+        component: () =>import('../views/ContactList')
       }
     ]
 

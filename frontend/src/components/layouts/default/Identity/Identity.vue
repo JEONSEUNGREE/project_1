@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import UserInformation from './UserInfor.vue'
+import UserInformation from './Index.vue'
 export default {
   name: "UserIdentity",
   components: {

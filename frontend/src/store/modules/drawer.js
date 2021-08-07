@@ -9,7 +9,7 @@ const state = {
     ]},
     { title: 'Organization', icon: 'mdi-view-dashboard', items:[
       { title: 'Organization Chart', icon: 'mdi-view-dashboard', to: '/orga'},
-      { title: 'Employee Contact List', icon: 'mdi-view-dashboard', to: '/list'}
+      { title: 'Employee Contact List', icon: 'mdi-view-dashboard', to: '/contact-list'}
     ]},
     { title: 'Board', icon: 'mdi-view-dashboard', to: '/board'}
   ]
