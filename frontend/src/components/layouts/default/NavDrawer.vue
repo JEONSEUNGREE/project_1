@@ -2,6 +2,7 @@
   <v-navigation-drawer
     v-model="drawer"
     app
+    v-bind="$attrs"
     v-on="$listeners"
   >
     <nav-header />

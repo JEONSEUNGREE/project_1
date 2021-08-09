@@ -3,6 +3,8 @@
     :prepend-icon="item.icon"
     eager
     v-bind="$attrs"
+    color="black"
+    v-on="$listeners"
   >
     <template v-slot:activator>
       <v-list-item-content>

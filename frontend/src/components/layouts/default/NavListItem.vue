@@ -1,9 +1,9 @@
 <template>
   <v-list-item
-    :key="item.title"
     link
-    active-class="primary"
     :to="item.to"
+    color="white"
+    active-class="primary"
   >
     <v-list-item-icon>
       <v-icon>{{ item.icon }}</v-icon>

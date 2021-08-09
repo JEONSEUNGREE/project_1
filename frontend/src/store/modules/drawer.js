@@ -4,8 +4,8 @@ const state = {
   items: [
     { title: 'Home', icon: 'mdi-view-dashboard', to: '/'},
     { title: 'T&A', icon: 'mdi-image', items:[
-      { title: 'Schedule', icon: 'mdi-view-dashboard', to: '/header'},
-      { title: 'Commuting Record', icon: 'mdi-view-dashboard', to: '/header'},
+      { title: 'Schedule', icon: 'mdi-view-dashboard', to: '/schedule'},
+      { title: 'Commuting Record', icon: 'mdi-view-dashboard', to: '/commuting'},
     ]},
     { title: 'Organization', icon: 'mdi-view-dashboard', items:[
       { title: 'Organization Chart', icon: 'mdi-view-dashboard', to: '/orga'},
