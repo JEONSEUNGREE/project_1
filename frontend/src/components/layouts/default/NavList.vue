@@ -2,6 +2,7 @@
   <v-list
     dense
     nav
+    expand
   >
     <template v-for="(item, index) in items ">
       <nav-list-group
