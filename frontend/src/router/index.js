@@ -12,7 +12,9 @@ const routes = [
       {
         path: "/",
         name: 'Home',
-        // component: () =>import('../views/default/DefaultPage')
+        component: () =>import('../views/Home')
+
+
       },
       {
         path: "/board",
