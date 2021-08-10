@@ -8,8 +8,8 @@ const state = {
       { title: 'Commuting Record', icon: 'mdi-view-dashboard', to: '/commuting'},
     ]},
     { title: 'Organization', icon: 'mdi-view-dashboard', items:[
-      { title: 'Organization Chart', icon: 'mdi-view-dashboard', to: '/orga'},
-      { title: 'Employee Contact List', icon: 'mdi-view-dashboard', to: '/contact-list'}
+      { title: 'Employee Contact List', icon: 'mdi-view-dashboard', to: '/contact-list'},
+      { title: 'Project Plan', icon: 'mdi-view-dashboard', to: '/plan'},
     ]},
     { title: 'Board', icon: 'mdi-view-dashboard', to: '/board'}
   ]

@@ -244,7 +244,6 @@
 </template>
 
 <script>
-import { db } from '@/main'
 export default {
   data: () => ({
     today: new Date().toISOString().substr(0, 10),
