@@ -6,11 +6,11 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     component: DefaultLayout,
     children:[
       {
-        path: "/",
+        path: "/home",
         name: 'Home',
         component: () =>import('../views/Home')
 
@@ -42,8 +42,12 @@ const routes = [
         component: () =>import('../views/Plan')
       }
     ]
-
   },
+  {
+    path: "/",
+    name: 'Signin',
+    component: () =>import('../views/authentication/Signin')
+  }
 ]
 
 const router = new VueRouter({
