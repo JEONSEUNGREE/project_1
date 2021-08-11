@@ -1,7 +1,7 @@
 <template>
   <v-container class="mt-15">
     <!-- <span>{{ $moment().format('YYYY-MM-DD') }}</span> -->
-    <v-row align="text-center">
+    <v-row>
       <v-col class="5">
         <v-card
           align="center"
