@@ -2,7 +2,7 @@ const state = {
   namespaced: true,
   drawer: false,
   items: [
-    { title: 'Home', icon: 'mdi-view-dashboard', to: '/'},
+    { title: 'Home', icon: 'mdi-view-dashboard', to: '/home'},
     { title: 'T&A', icon: 'mdi-image', items:[
       { title: 'Schedule', icon: 'mdi-view-dashboard', to: '/schedule'},
       { title: 'Commuting Record', icon: 'mdi-view-dashboard', to: '/commuting'},
