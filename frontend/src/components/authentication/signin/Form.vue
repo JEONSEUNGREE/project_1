@@ -106,12 +106,11 @@
 
 <script>
 // signup 연결 버튼
-import SignUp from '../Signup.vue'
 
 export default {
 
   components: {
-    SignUp,
+    SignUp: () => import('../Signup.vue')
   },
   data: () => ({
     inheritAttrs: false,
@@ -126,7 +125,8 @@ export default {
         alert("로그인")
       }
     }
-  }
+  },
+
 
 }
 </script>
