@@ -47,6 +47,7 @@ export default {
       },
       set (value) {
         return this.$store.dispatch('drawer/toggleDrawer', value)
+
       }
     },
   }

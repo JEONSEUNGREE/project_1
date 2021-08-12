@@ -27,6 +27,22 @@
                 v-slot="{ errors }"
                 :rules="{
                   required: true,
+                  max: true|25,
+                }"
+                name="password"
+              >
+                <v-text-field
+                  v-model="password"
+                  label="Password"
+                  :error-messages="errors"
+                  :counter="25"
+                  type="password"
+                />
+              </validation-provider>
+              <validation-provider
+                v-slot="{ errors }"
+                :rules="{
+                  required: true,
                   numeric: true,
                   digits: 11
                 }"
@@ -62,13 +78,26 @@
                   required: true
                 }"
               >
-                <v-select
-                  v-model="select"
-                  :error-messages="errors"
-                  label="Select"
-                  :items="items"
-                />
+                <v-row>
+                  <v-col>
+                    <v-select
+                      v-model="team"
+                      :error-messages="errors"
+                      label="Team"
+                      :items="items"
+                    />
+                  </v-col>
+                  <v-col>
+                    <v-select
+                      v-model="auth"
+                      :error-messages="errors"
+                      label="Auth"
+                      :items="roles"
+                    />
+                  </v-col>
+                </v-row>
               </validation-provider>
+
               <validation-provider
                 v-slot="{ errors }"
                 :rules="{
@@ -115,35 +144,47 @@ export default {
   data: ()=> ({
     name: null,
     phoneNumber: null,
+    password: null,
     email: null,
     checkbox: null,
-    select: null,
+    team: null,
+    auth: null,
+
   }),
   computed: {
     ...mapState('authentication', {
       items: 'items',
+      roles: 'roles'
     }),
-
   },
 
   methods: {
+
     submit() {
       this.$refs.observer.validate().then(result => {
-        console.log(result)
         if(result) {
-          alert('양식제출')
+          this.$store.dispatch('authentication/register',
+            { name: this.name,
+              phoneNumber: this.phoneNumber,
+              password: this.password,
+              email: this.email,
+              team: this.team,
+              auth: this.auth
+            } )
         }
       })
     },
+
     clear() {
       this.name = null
       this.phoneNumber = null
       this.email = null
       this.checkbox = null
-      this.select = null
+      this.team = null
+      this.auth = null
     }
+  },
 
-  }
 
 }
 </script>

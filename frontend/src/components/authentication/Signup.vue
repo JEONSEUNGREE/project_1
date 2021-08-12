@@ -26,7 +26,7 @@
           <v-btn
             icon
             dark
-            @click="close"
+            @click="dialog = !dialog"
           >
             <v-icon>mdi-close</v-icon>
           </v-btn>
@@ -53,11 +53,10 @@ export default {
     inheritAttrs: false,
     dialog: false,
   }),
-  methods: {
-    close(){
-      
-    }
-  },
+  computed: {
+    
+  }
+
 
 }
 </script>
