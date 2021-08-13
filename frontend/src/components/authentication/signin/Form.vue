@@ -4,7 +4,7 @@
       ref="observer"
       v-slot="{ invalid }"
     >
-      <v-form @submit.prevent="singup">
+      <v-form @submit.prevent="singin">
         <v-row justify="center">
           <v-radio-group
             v-model="role"
@@ -119,12 +119,15 @@ export default {
     role: null,
   }),
   methods: {
-    async singup ()  {
-      const result = await this.observer.validate()
-      if ( result) {
-        alert("로그인")
+    async singin ()  {
+      const result = await this.$refs.observer.validate()
+
+      if ( result ) {
+        this.$store.dispatch('authentication/signin',
+          { email: this.email, password: this.password, auth: this.role } )
       }
-    }
+    },
+
   },
 
 

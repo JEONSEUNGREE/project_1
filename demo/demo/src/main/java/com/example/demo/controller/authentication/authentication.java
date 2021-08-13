@@ -1,17 +1,25 @@
 package com.example.demo.controller.authentication;
 
 
+import com.example.demo.controller.authentication.session.UserInfo;
+import com.example.demo.entity.Employee;
+import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.repository.receive.EmployeeReceive;
 import com.example.demo.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -22,6 +30,13 @@ public class authentication {
     @Autowired
     EmployeeService employeeService;
 
+    private HttpSession session;
+
+    @Autowired
+    EmployeeRepository employeeRepository;
+
+    private UserInfo info;
+
     @PostMapping("/signup")
     public ResponseEntity<Void> signup(@RequestBody EmployeeReceive employeeReceive) throws Exception {
         log.info("EmployeeReceive" + employeeReceive.toString());
@@ -29,6 +44,60 @@ public class authentication {
         employeeService.signup(employeeReceive);
 
         return new ResponseEntity<Void> (HttpStatus.OK);
+    }
+
+    @PostMapping("/signin")
+    public ResponseEntity<UserInfo> jpaLogin(
+            @RequestBody EmployeeReceive employeeReceive,
+            HttpServletRequest request
+    ) throws Exception {
+
+        log.info("employeeReceive" + employeeReceive.toString());
+
+        Integer isSuccess = employeeService.signin(employeeReceive);
+
+
+
+
+
+        switch (isSuccess) {
+            case 1:
+            info.setErrorMessage(1);
+                log.info("Login Failure");
+                break;
+
+            case 2:
+            info.setErrorMessage(2);
+                log.info("Login Failure");
+                break;
+
+            case 3:
+                info = new UserInfo();
+                Employee empInfo = employeeRepository.findInfo(employeeReceive.getEmail());
+                info.setErrorMessage(3);
+                log.info("Login Success");
+                info.setEmail(empInfo.getEmail());
+                info.setName(empInfo.getName());
+                info.setTeam(empInfo.getTeam());
+
+                log.info("Session Info: " + info);
+                session = request.getSession();
+                session.setAttribute("emp", info);
+                break;
+        }
+        return new ResponseEntity<UserInfo>(info, HttpStatus.OK);
+    }
+
+    @PostMapping("/removeSession")
+    public ResponseEntity<Optional> removeSession(HttpServletRequest request) throws Exception {
+
+        Optional mustNull = null;
+
+        log.info("Logout()" + mustNull);
+
+        session.invalidate();
+
+        return new ResponseEntity<Optional>(mustNull, HttpStatus.OK);
     }
 
 

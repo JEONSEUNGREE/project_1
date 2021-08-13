@@ -2,14 +2,22 @@
   <v-list>
     <v-list>
       <v-list-item
-        v-for="(item, index) in infor"
-        :key="index"
         link
       >
         <v-list-item-title
           class="text-subtitle-1"
         >
-          {{ item.title }}
+          {{ infor[0].title }}
+        </v-list-item-title>
+      </v-list-item>
+      <v-list-item
+        link
+        @click="signout"
+      >
+        <v-list-item-title
+          class="text-subtitle-1"
+        >
+          {{ infor[1].title }}
         </v-list-item-title>
       </v-list-item>
     </v-list>
@@ -24,8 +32,12 @@ export default {
     ...mapState('userInfor', {
       infor: 'infor'
     })
-
   },
+  methods: {
+    signout() {
+      this.$store.dispatch('authentication/signout')
+    }
+  }
 
 }
 </script>

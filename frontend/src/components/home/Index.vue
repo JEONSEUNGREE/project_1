@@ -17,7 +17,7 @@
         <template>
           <v-data-table
             :headers="headers"
-            :items="desserts"
+            :items="boards"
             :items-per-page="3"
             hide-default-footer
           />
@@ -28,47 +28,26 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-  data() {
-    return {
-      interval: null,
-      time: null,
-      headers: [
-        {
-          text: 'No',
-          align: 'center',
-          value: 'no',
-        },
-        { text: 'Title', value: 'title' },
-        { text: 'Writer', value: 'writer' },
-        { text: 'Date', value: 'date' },
-      ],
-      desserts: [
-        {
-          no: '1',
-          title: 'Coding Project',
-          writer: 'Ree',
-          date: '2021-08-10',
-        },
-        {
-          no: '2',
-          title: 'work hard',
-          writer: 'Ree',
-          date: '2021-08-10',
-        },
-        {
-          no: '3',
-          title: 'play hard',
-          writer: 'Ree',
-          date: '2021-08-10',
-        },
-      ]
-    }
+  data:() => ({
+    interval: null,
+    time: null,
+  }),
+
+  computed: {
+    ...mapState('board', {
+      headers: 'headers',
+      boards: 'boards'
+    }),
   },
+
   beforeDestroy() {
     // prevent memory leak
     clearInterval(this.interval)
   },
+
   created() {
     // update the time every second
     this.interval = setInterval(() => {

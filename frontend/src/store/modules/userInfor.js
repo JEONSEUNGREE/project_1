@@ -1,7 +1,7 @@
 const state = {
   infor: [
-    { title: 'Modify' },
-    { title: 'Log out' },
+    { title: 'Modify', inactive: true },
+    { title: 'Sign out' },
   ],
 }
 

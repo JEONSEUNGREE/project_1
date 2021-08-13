@@ -25,6 +25,9 @@ public class Employee {
     @Column(length = 100, nullable = false)
     private String email;
 
+    @Column(length = 50, nullable = false)
+    private String name;
+
     @Column(length = 200, nullable = false)
     private String password;
 
@@ -44,11 +47,12 @@ public class Employee {
     @JoinColumn(name = "employee_no")
     private List<Auth> authList = new ArrayList<Auth>();
 
-    public Employee(String email, String password, String phoneNumber, String team) {
+    public Employee(String email, String password, String phoneNumber, String team, String name) {
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.team = team;
+        this.name = name;
     }
 
     public void addAuth(Auth auth) {

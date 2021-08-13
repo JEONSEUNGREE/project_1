@@ -1,6 +1,5 @@
 package com.example.demo.entity;
 
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,17 +11,22 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "auth")
-public class Auth {
+@Table(name = "board")
+public class Board {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long employeeAuthNo;
+    @Column(name = "board_no")
+    private Long boardNo;
 
-    @Column(name = "employee_no")
-    private Long employeeNo;
+    @Column(length = 100, nullable = false)
+    private String title;
 
-    @Column(length = 30, nullable = false)
-    private String auth;
+    @Column(length = 50, nullable = false)
+    private String writer;
+
+    @Column(length = 1000, nullable = false)
+    private String content;
 
     @CreationTimestamp
     private Date regDate;
@@ -30,7 +34,5 @@ public class Auth {
     @UpdateTimestamp
     private Date upDate;
 
-    public Auth(String auth) {
-        this.auth = auth;
-    }
+
 }

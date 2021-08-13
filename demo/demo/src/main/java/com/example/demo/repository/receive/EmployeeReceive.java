@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 public class EmployeeReceive {
 
     private String email;
+    private String name;
     private String password;
     private String phoneNumber;
     private String team;
