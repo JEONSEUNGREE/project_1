@@ -1,33 +1,29 @@
 const state = {
   headers: [
-    {
-      text: 'No',
-      align: 'start',
-      sortable: true,
-      value: 'name',
-    },
-    { text: 'Title', value: 'calories', align: 'center'},
-    { text: 'Writer', value: 'calories', align: 'end',},
-    { text: 'Date', value: 'fat', align: 'end', },
-    { text: 'views', value: 'carbs',align: 'end', },
+    { text: 'No', align: 'center', value: 'no',},
+    { text: 'Title', value: 'title' },
+    { text: 'Writer', value: 'writer' },
+    { text: 'Date', value: 'date' },
   ],
 
   boards: [
     {
-      name: '1',
-      calories: 159,
-      fat: 6.0,
-      carbs: 24,
-      protein: 4.0,
-      iron: '1%',
+      no: '1',
+      title: 'Coding Project',
+      writer: 'Ree',
+      date: '2021-08-10',
     },
     {
-      name: '2',
-      calories: 237,
-      fat: 9.0,
-      carbs: 37,
-      protein: 4.3,
-      iron: '1%',
+      no: '2',
+      title: 'work hard',
+      writer: 'Ree',
+      date: '2021-08-10',
+    },
+    {
+      no: '3',
+      title: 'play hard',
+      writer: 'Ree',
+      date: '2021-08-10',
     },
 
   ],
