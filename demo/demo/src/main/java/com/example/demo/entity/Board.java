@@ -31,8 +31,15 @@ public class Board {
     @CreationTimestamp
     private Date regDate;
 
+
     @UpdateTimestamp
     private Date upDate;
+
+    public Board(String title, String writer, String content) {
+        this.title = title;
+        this.writer = writer;
+        this.content = content;
+    }
 
 
 }
