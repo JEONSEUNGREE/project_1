@@ -124,7 +124,8 @@ export default {
 
       if ( result ) {
         this.$store.dispatch('authentication/signin',
-          { email: this.email, password: this.password, auth: this.role } )
+          { email: this.email, password: this.password, auth: this.role }
+        )
       }
     },
 

@@ -3,16 +3,16 @@
     <v-list-item>
       <v-list-item-avatar>
         <img
-          src="https://cdn.vuetifyjs.com/images/john.jpg"
+          src="@/assets/EMP.jpg"
           alt="user"
         >
       </v-list-item-avatar>
       <v-list-item-content>
         <v-list-item-title>
-          User
+          {{ name }}
         </v-list-item-title>
         <v-list-item-subtitle>
-          User Information
+          {{ "Department : " + depart }}
         </v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
@@ -20,8 +20,18 @@
 </template>
 
 <script>
+
 export default {
-  name: "UserInforTitle"
+  name: 'UserInfor',
+  computed: {
+    name() {
+      return localStorage.getItem('name')
+    },
+    depart() {
+      return localStorage.getItem('team')
+      // return this.$store.getters['authentication/getEmpDepart']
+    }
+  }
 
 }
 </script>

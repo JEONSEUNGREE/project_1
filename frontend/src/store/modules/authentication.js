@@ -2,13 +2,14 @@ import axios from "axios"
 import router from "../../router"
 
 const state = {
-  empInfo: {
-    isLogin: null,
-    team: null,
-    name: null,
-  },
+  // empInfo: {
+  //   isLogin: null,
+  //   team: null,
+  //   name: null,
+  // },
+  // 권한에 따른 버튼 활성화지만 localstorage에서 바꾸면 보인다.
 
-
+  role: localStorage.getItem('auth') == 'admin' ? true : false,
   items: [
     // value로 값 받음
     {text: '개발팀', value: 'dev'},
@@ -24,7 +25,10 @@ const state = {
 }
 
 const getters = {
-
+//로컬로 저장 새로고침시 정보가 사라짐
+  // getEmpInfo: state => state.empInfo.name,
+  // getEmpDepart: state => state.empInfo.team,
+  getRole: state => state.role
 
 }
 
@@ -49,15 +53,13 @@ const mutations  = {
   SIGN_IN(state, payload) {
     axios.post('http://localhost:7777/authenticate/signin', payload)
       .then(res => {
-        const { errorMessage , email, name, team } = res.data
+        const { errorMessage , email, name, team, auth } = res.data
 
         if(errorMessage === 3) {
-          localStorage.setItem('empInfo', email)
-          state.empInfo.email = email
-          state.empInfo.name = name
-          state.empInfo.team = team
-
-          alert(state.empInfo.name + state.empInfo.team)
+          localStorage.setItem('email',email)
+          localStorage.setItem('name',name)
+          localStorage.setItem('team',team)
+          localStorage.setItem('auth',auth)
 
           alert("로그인 성공")
           router.push('/home')
@@ -75,19 +77,26 @@ const mutations  = {
   },
   SIGN_OUT(state) {
 
-    axios.post('http://localhost:7777/authenticate/removeSession')
+    axios.post('http://localhost:7777/authenticate/logoutSession')
       .then(res => {
         alert(res)
         if (res.data == '') {
-          
-          localStorage.removeItem('empInfo')
+
+          localStorage.removeItem('email')
+          localStorage.removeItem('name')
+          localStorage.removeItem('team')
 
           router.push('/')
         } else {
           alert('error')
         }
       }).catch(err => {
-        alert(err)
+        alert("로그아웃")
+        console.log(err)
+        localStorage.removeItem('email')
+        localStorage.removeItem('name')
+        localStorage.removeItem('team')
+        router.push('/')
       })
   }
 

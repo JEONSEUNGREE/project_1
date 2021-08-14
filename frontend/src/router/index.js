@@ -5,16 +5,13 @@ import DefaultLayout from '../views/default/DefaultPage'
 
 
 const isAuthenticated = (to, from, next) => {
-  if (localStorage.getItem('empInfo') !== null) {
-
+  if (localStorage.getItem('email') !== null) {
     next()
   } else {
     next('/');
     alert('로그인이 필요합니다')
   }
 };
-
-
 
 Vue.use(VueRouter)
 

@@ -20,20 +20,53 @@
             :items="boards"
             :items-per-page="3"
             hide-default-footer
-          />
+            :sort-by="['boardNo']"
+            :sort-desc="[true]"
+          >
+            <template v-slot:[`item.regDate`]="{ item }">
+              <display-time :time="item.regDate" />
+            </template>
+            <template v-slot:[`item.title`]="{ item }">
+              <a
+                class="black--text"
+                @click="openDialog(item)"
+              >{{ item.title }} </a>
+            </template>
+          </v-data-table>
         </template>
       </v-col>
     </v-row>
+    <v-dialog
+      v-if="selectedItem"
+      v-model="dialog"
+      max-width="800"
+    >
+      <board-content
+        :item="selectedItem"
+        @change="change"
+      />
+    </v-dialog>
   </v-container>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState,mapActions } from 'vuex'
+
+import DisplayTime from '../board/display-time.vue'
+
+import BoardContent from '../board/BoardContent.vue'
 
 export default {
+
+  components: {
+    DisplayTime,
+    BoardContent
+  },
   data:() => ({
     interval: null,
     time: null,
+    dialog: false,
+    selectedItem: null
   }),
 
   computed: {
@@ -44,22 +77,33 @@ export default {
   },
 
   beforeDestroy() {
-    // prevent memory leak
     clearInterval(this.interval)
   },
 
   created() {
-    // update the time every second
+    this.fetchBoard()
+
     this.interval = setInterval(() => {
-      // Concise way to format time according to system locale.
-      // In my case this returns "3:48:00 am"
+
       this.time = Intl.DateTimeFormat('en-US', {
         hour: 'numeric',
         minute: 'numeric',
         second: 'numeric'
       }).format()
     }, 1000)
-  }
+  },
+  methods: {
+    ...mapActions('board', {
+      fetchBoard: 'fetchBoard'
+    }),
+    openDialog (item) {
+      this.selectedItem = item
+      this.dialog = true
+    },
+    change() {
+      this.dialog = false
+    }
+  },
 }
 
 </script>

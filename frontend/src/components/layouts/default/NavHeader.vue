@@ -2,10 +2,10 @@
   <v-list-item>
     <v-list-item-content>
       <v-list-item-title class="text-h6">
-        프로젝트
+        {{ email }}
       </v-list-item-title>
       <v-list-item-subtitle>
-        로그인한 직원이름
+        {{ name }}
       </v-list-item-subtitle>
     </v-list-item-content>
   </v-list-item>
@@ -13,8 +13,15 @@
 
 <script>
 export default {
-  name: "NavHeader"
-
+  name: "NavHeader",
+  computed: {
+    name() {
+      return localStorage.getItem('email')
+    },
+    email() {
+      return localStorage.getItem('name')
+    }
+  }
 }
 </script>
 
