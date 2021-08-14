@@ -75,6 +75,7 @@ const mutations  = {
         // snackbar
       })
   },
+
   SIGN_OUT(state) {
 
     axios.post('http://localhost:7777/authenticate/logoutSession')
@@ -114,7 +115,8 @@ const actions = {
   },
   signout({ commit }) {
     commit('SIGN_OUT')
-  }
+  },
+  // modifyUserInfor({ commit })
 
 
 }
