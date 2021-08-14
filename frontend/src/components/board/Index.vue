@@ -34,6 +34,7 @@
       v-if="selectedItem"
       v-model="dialog"
       max-width="800"
+      persistent
     >
       <board-content
         :item="selectedItem"

@@ -109,6 +109,7 @@ export default {
     deleteBoard() {
       this.$store.dispatch('board/deleteBoard',this.boardNo)
       this.change()
+
     }
   }
 }
