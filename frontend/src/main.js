@@ -5,6 +5,7 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 // validate plugin
 import './plugins'
+import './plugins/moment'
 
 
 

@@ -3,6 +3,9 @@
     flat
     class="mb-2"
   >
+    <div v-if="role">
+      <posting />
+    </div>
     <v-spacer />
     <template>
       <tr>
@@ -32,12 +35,24 @@
 <script>
 export default {
   name: "SearchBar",
+  components: {
+    Posting: () => import('./Posting.vue')
+  },
 
   inheritAttrs: false,
+
 
   data: () => ({
     hidden: false,
   })
+  ,
+  computed: {
+    // 권한에 따른 버튼 활성화지만 localstorage에서 바꾸면 보인다.
+    role() {
+      return this.$store.getters['authentication/getRole']
+    }
+  }
+
 
 }
 </script>

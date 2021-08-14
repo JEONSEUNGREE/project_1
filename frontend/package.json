@@ -12,6 +12,7 @@
     "@egjs/vue-flicking": "^4.0.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "moment": "^2.29.1",
     "vee-validate": "^3.4.11",
     "vue": "^2.6.11",
     "vue-moment": "^4.1.0",

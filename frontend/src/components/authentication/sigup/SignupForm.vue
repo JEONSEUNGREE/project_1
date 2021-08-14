@@ -172,12 +172,15 @@ export default {
               auth: this.auth
             } )
         }
+        this.clear()
+        this.$emit('change')
       })
     },
 
     clear() {
       this.name = null
       this.phoneNumber = null
+      this.password = null
       this.email = null
       this.checkbox = null
       this.team = null

@@ -35,7 +35,7 @@
           <v-spacer />
         </v-toolbar>
 
-        <sign-up-form />
+        <sign-up-form @change="change" />
       </v-card>
     </v-dialog>
   </v-row>
@@ -53,10 +53,11 @@ export default {
     inheritAttrs: false,
     dialog: false,
   }),
-  computed: {
-    
+  methods:{
+    change() {
+      this.dialog = !this.dialog
+    }
   }
-
 
 }
 </script>

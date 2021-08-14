@@ -5,14 +5,12 @@ import com.example.demo.entity.Auth;
 import com.example.demo.entity.Employee;
 import com.example.demo.repository.EmployeeAuth;
 import com.example.demo.repository.EmployeeRepository;
-import com.example.demo.repository.receive.EmployeeMapping;
 import com.example.demo.repository.receive.EmployeeReceive;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -74,8 +72,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findById(employeeNo);
     }
 
-//    @Override
-//    public List<EmployeeMapping> findByInfo(String email) throws Exception {
-//        return employeeRepository.findByInfo(email);
-//    }
+    @Override
+    public Employee findInfo(String email) throws Exception {
+        return employeeRepository.findInfo(email);
+    }
 }

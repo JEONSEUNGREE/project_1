@@ -16,6 +16,7 @@ module.exports = {
     //No 레거시
     'indent': ["error", 2]
     //두칸 뛰어쓰기
-  }
+  },
+ 
 }
 

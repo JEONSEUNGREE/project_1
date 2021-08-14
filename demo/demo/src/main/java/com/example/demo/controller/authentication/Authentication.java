@@ -25,15 +25,12 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/authenticate")
 @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
-public class authentication {
+public class Authentication {
 
     @Autowired
     EmployeeService employeeService;
 
     private HttpSession session;
-
-    @Autowired
-    EmployeeRepository employeeRepository;
 
     private UserInfo info;
 
@@ -56,10 +53,6 @@ public class authentication {
 
         Integer isSuccess = employeeService.signin(employeeReceive);
 
-
-
-
-
         switch (isSuccess) {
             case 1:
             info.setErrorMessage(1);
@@ -71,16 +64,23 @@ public class authentication {
                 log.info("Login Failure");
                 break;
 
+                //보낼정보가 많아서 따로 만들필요가 없었던것같다 나중에 수정
             case 3:
                 info = new UserInfo();
-                Employee empInfo = employeeRepository.findInfo(employeeReceive.getEmail());
+                Employee empInfo = employeeService.findInfo(employeeReceive.getEmail());
                 info.setErrorMessage(3);
                 log.info("Login Success");
                 info.setEmail(empInfo.getEmail());
                 info.setName(empInfo.getName());
                 info.setTeam(empInfo.getTeam());
+                
+                Optional<Employee> empauth = employeeService.findByAuth(empInfo.getEmployeeNo());
+                Employee emp = empauth.get();
 
-                log.info("Session Info: " + info);
+                info.setAuth(emp.getAuthList().get(0).getAuth());
+                log.info("auth" + info.getAuth());
+
+               log.info("Session Info: " + info);
                 session = request.getSession();
                 session.setAttribute("emp", info);
                 break;
@@ -88,7 +88,7 @@ public class authentication {
         return new ResponseEntity<UserInfo>(info, HttpStatus.OK);
     }
 
-    @PostMapping("/removeSession")
+    @PostMapping("/logoutSession")
     public ResponseEntity<Optional> removeSession(HttpServletRequest request) throws Exception {
 
         Optional mustNull = null;

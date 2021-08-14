@@ -16,4 +16,6 @@ public class UserInfo implements Serializable {
     private Integer errorMessage;
     private String name;
     private String team;
+    private String auth;
+    private Long empNo;
 }
