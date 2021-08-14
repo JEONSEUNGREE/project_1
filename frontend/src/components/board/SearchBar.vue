@@ -3,7 +3,7 @@
     flat
     class="mb-2"
   >
-    <div v-if="role">
+    <div v-show="role">
       <posting />
     </div>
     <v-spacer />
@@ -51,7 +51,8 @@ export default {
     role() {
       return this.$store.getters['authentication/getRole']
     }
-  }
+  },
+
 
 
 }

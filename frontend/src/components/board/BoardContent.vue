@@ -12,13 +12,11 @@
       <v-text-field
         v-model="title"
         :disabled="modify"
-        filled
       />
 
       <v-text-field
         v-model="content"
         :disabled="modify"
-        filled
       />
 
       <v-divider />
@@ -91,7 +89,6 @@ export default {
     }
   },
 
-
   methods: {
     change() {
       this.$emit('change')
@@ -109,7 +106,6 @@ export default {
     deleteBoard() {
       this.$store.dispatch('board/deleteBoard',this.boardNo)
       this.change()
-
     }
   }
 }

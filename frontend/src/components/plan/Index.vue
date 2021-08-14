@@ -3,6 +3,11 @@
     <h2 class="grey--text">
       ProjectPlan
     </h2>
+    <v-btn text>
+      <h4 class="font-weight-light ">
+        Depart : {{ team }}
+      </h4>
+    </v-btn>
 
     <v-snackbar
       v-model="snackbar"
@@ -20,8 +25,7 @@
         Close
       </v-btn>
     </v-snackbar>
-
-    <v-container class="my-5">
+    <v-container class="my-3">
       <v-row class="my-5">
         <v-col class="mb-3">
           <add-project @projectAdded="snackbar = !snackbar" />
@@ -73,7 +77,7 @@
       </v-row>
 
       <v-card
-        v-for="( project, i ) in projects"
+        v-for="( project, i ) in get"
         :key="i"
         flat
         class="ml-15"
@@ -118,6 +122,13 @@
                 <!-- :color="project.status==='complete'?'green':project.status==='ongoing'?'blue':'orange'" -->
                 {{ project.status }}
               </v-chip>
+              <v-btn
+                v-show="role"
+                icon
+                @click="delProject(project.projectNo)"
+              >
+                <v-icon>mdi-delete</v-icon>
+              </v-btn>
             </div>
           </v-col>
         </v-row>
@@ -129,20 +140,48 @@
 </template>
 
 <script>
-import AddProject from './AddProject.vue'
+
+import { mapActions } from 'vuex'
+
 export default {
-  components: { AddProject },
+  components: {
+    AddProject: () => import('./AddProject.vue')
+  },
+
   data: ()=> ({
-    projects: [
-      { title: 'd esign a new webSite', person: 'Zealot', due: '4st Jan 2019', status: 'complete'},
-      { title: 'a dbadsfnew webSite', person: 'Dragoon', due: '2st Jan 2019', status: 'ongoing'},
-      { title: 'z sdfasdf the beat', person: 'Tank', due: '1st Jan 2019', status: 'overdue'}
-    ],
+    // projects: [
+    //   { title: 'd esign a new webSite', person: 'Zealot', due: '4st Jan 2019', status: 'complete'},
+    //   { title: 'a dbadsfnew webSite', person: 'Dragoon', due: '2st Jan 2019', status: 'ongoing'},
+    //   { title: 'z sdfasdf the beat', person: 'Tank', due: '1st Jan 2019', status: 'overdue'}
+    // ],
     snackbar: false
   }),
+  computed: {
+
+    get () {
+      return this.$store.getters['project/getProject']
+    },
+    team() {
+      return localStorage.getItem('team')
+    },
+    role() {
+      return this.$store.getters['authentication/getRole']
+    }
+
+  },
+  created() {
+    this.fetchProject()
+  },
+
   methods: {
+    ...mapActions('project', {
+      fetchProject: 'fetchProject'
+    }),
     sortBy(value) {
-      this.projects.sort((a,b) => a[value] < b[value] ? -1 : 1)
+      this.$store.dispatch('project/getSort', value)
+    },
+    delProject(value) {
+      this.$store.dispatch('project/deleteProject', value)
     }
   }
 

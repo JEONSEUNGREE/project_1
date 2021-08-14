@@ -20,7 +20,8 @@ const state = {
   roles: [
     {text: '관리자', value: 'admin'},
     {text: '직원', value: 'emp'},
-  ]
+  ],
+
 
 }
 
@@ -55,6 +56,7 @@ const mutations  = {
       .then(res => {
         const { errorMessage , email, name, team, auth } = res.data
 
+        state.email = email
         if(errorMessage === 3) {
           localStorage.setItem('email',email)
           localStorage.setItem('name',name)
@@ -117,6 +119,7 @@ const actions = {
     commit('SIGN_OUT')
   },
   // modifyUserInfor({ commit })
+
 
 
 }
