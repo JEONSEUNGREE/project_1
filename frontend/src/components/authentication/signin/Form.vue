@@ -85,6 +85,7 @@
             </v-btn>
           </v-col>
           <v-col class="mt-3 mr-10">
+            <!-- 가입 -->
             <sign-up />
           </v-col>
           <v-col class="mr-15">
