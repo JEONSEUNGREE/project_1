@@ -25,6 +25,7 @@ const mutations  = {
 
 }
 const actions = {
+  
   fetchBoard({ commit }) {
     axios.get('http://localhost:7777/board/fetch')
       .then(res => {
