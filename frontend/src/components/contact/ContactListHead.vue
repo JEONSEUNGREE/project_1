@@ -3,46 +3,49 @@
   <v-row no-gutters>
     <v-col
       cols="1"
-      class="ma-1 ml-8 grey--test font-weight-light text-subtitle-1
-          text--secondary"
-    >
-      No
-    </v-col>
-    <v-col
-      cols="1"
-      class="ma-1 ml-1 font-weight-light
+      class="ma-1 ml-10 font-weight-light
           text-subtitle-1
           text--secondary "
     >
-      Depart
+      {{ headers.Depart }}
     </v-col>
     <v-col
       cols="2"
       class="ma-1 ml-16 font-weight-light text-subtitle-1
           text--secondary"
     >
-      Name
+      {{ headers.Name }}
     </v-col>
     <v-col
       cols="3"
       class="ma-1 ml-11 font-weight-light text-subtitle-1
           text--secondary"
     >
-      Contact
+      {{ headers.Contact }}
     </v-col>
     <v-col
       cols="3"
       class="ma-1 ml-8 font-weight-light
           text--secondary "
     >
-      Mail
+      {{ headers.Email }}
     </v-col>
   </v-row>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: "ContactListHead",
+
+
+
+  computed: {
+    ...mapState('contact', {
+      headers: 'headers'
+    })
+  }
 
 }
 </script>

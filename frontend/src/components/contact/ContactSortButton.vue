@@ -1,5 +1,6 @@
 <template>
   <v-row class="mb-1 mr-10 py-2">
+    <!-- <add-contact-list /> -->
     <v-spacer />
     <v-btn
       small
@@ -34,6 +35,10 @@
 
 export default {
   name: "ContactSortButton",
+
+  components: {
+    // addContactList: () => import('./addContactList.vue')
+  },
   inheritAttrs: false,
 
   methods: {
