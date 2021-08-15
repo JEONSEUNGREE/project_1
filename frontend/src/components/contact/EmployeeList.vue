@@ -8,18 +8,17 @@
       v-bind="$attrs"
       v-on="$listeners"
     >
-      <v-row>
+      <v-row no-gutters>
         <v-col
           cols="1"
-          class="ma-1 ml-5 grey--test font-weight-light text-subtitle-1"
+          class="ma-1 ml-8 font-weight-light text-subtitle-1 "
         >
-          {{ em.no }}
-        </v-col>
-        <v-col
-          cols="1"
-          class="ma-1  font-weight-light text-subtitle-1 "
-        >
-          {{ em.depart }}
+          <v-chip
+            :color="em.team==='dev'?'green':em.team==='purchase'?'blue':'orange'"
+            class=" white--text my-2"
+          >
+            {{ em.team }}
+          </v-chip>
         </v-col>
         <!-- 클릭시 상세설명 부분 -->
         <v-dialog
@@ -48,13 +47,13 @@
           cols="3"
           class="ma-1 ml-10 font-weight-light text-subtitle-1"
         >
-          {{ em.contact }}
+          {{ em.phoneNumber }}
         </v-col>
         <v-col
-          cols="3"
+          cols="4"
           class="ma-1 font-weight-light"
         >
-          {{ em.mail }}
+          {{ em.email }}
         </v-col>
       </v-row>
     </v-list-item>
@@ -62,7 +61,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: "EmplyeeList",
@@ -73,7 +72,14 @@ export default {
     ...mapState('contact',{
       employee: 'employee'
     })
-
+  },
+  created() {
+    this.fetchContact()
+  },
+  methods: {
+    ...mapActions('contact', {
+      fetchContact: 'fetchContact'
+    }),
   }
 
 }
