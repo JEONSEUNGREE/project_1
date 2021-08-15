@@ -1,15 +1,14 @@
 package com.example.demo.service;
 
 
+import com.example.demo.entity.Employee;
 import com.example.demo.entity.Project;
 
 import java.util.List;
 
-public interface ProjectService {
+public interface ContactService {
 
-    public void addproject(Project project) throws Exception;
+//    public List<Object[]> getEmployeeList() throws Exception;
+    public List<Employee> getEmployeeList() throws Exception;
 
-    public List<Project> fetchProject() throws Exception;
-
-    public void deleteProject(Long boardNo) throws Exception;
 }

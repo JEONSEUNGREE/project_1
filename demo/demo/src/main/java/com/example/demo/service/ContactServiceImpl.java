@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
 
+import com.example.demo.entity.Employee;
 import com.example.demo.entity.Project;
+import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.repository.ProjectRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,23 +13,13 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class ProjecctImpl implements ProjectService{
+public class ContactServiceImpl implements ContactService{
 
     @Autowired
-    ProjectRepository projectRepository;
+    EmployeeRepository employeeRepository;
 
     @Override
-    public void addproject(Project project) throws Exception {
-        projectRepository.save(project);
-    }
-
-    @Override
-    public List<Project> fetchProject() throws Exception {
-        return projectRepository.findAll();
-    }
-
-    @Override
-    public void deleteProject(Long boardNo) throws Exception {
-        projectRepository.deleteById(boardNo);
+    public List<Employee> getEmployeeList() throws Exception {
+        return employeeRepository.findAll();
     }
 }
