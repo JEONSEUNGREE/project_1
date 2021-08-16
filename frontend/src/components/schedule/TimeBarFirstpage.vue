@@ -20,19 +20,19 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
+  
   data: () => ({
-    name: 'Timebar',
-    timeone: [
-      {time: "NAME"},
-      {time: "8AM"},
-      {time: "9AM"},
-      {time: "10AM"},
-      {time: "11AM"},
-      {time: "12AM"},
-      {time: "13AM"},
-    ],
-  })
+    name: 'TimebarFirstpage',
+  }),
+
+  computed: {
+    ...mapState('schedule', {
+      timeone: 'timeone'
+    })
+  }
+
 
 }
 </script>

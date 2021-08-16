@@ -7,13 +7,13 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
-          color="orange"
+          color="green"
           dark
           v-bind="attrs"
           text
           v-on="on"
         >
-          New schedule
+          Modify schedule
         </v-btn>
       </template>
 
@@ -21,9 +21,10 @@
         v-slot="{ invalid }"
         ref="observer"
       >
+        {{ load }}
         <v-card>
           <v-card-title>
-            <span class="text-h5">New Schedule</span>
+            <span class="text-h5">Modify Schedule</span>
           </v-card-title>
           <v-card-text>
             <v-container>
@@ -40,6 +41,7 @@
                     >
                       <v-text-field
                         v-model="time8"
+                        :value="get.time9"
                         label="8AM"
                         placeholder="Hard Coding"
                         :error-messages="errors"
@@ -262,7 +264,7 @@
               color="blue darken-1"
               text
               :disabled="invalid"
-              @click="addSchedule"
+              @click="modifySchedule"
             >
               Save
             </v-btn>
@@ -275,15 +277,10 @@
 <script>
 
 export default {
-
-  name: "ScheduleSet",
-
+  name: "ScheduleModify",
   data: () => ({
     dialog: false,
-    value: [],
-    text: null,
-    items: ['8AM', '9AM', '10AM', '11AM', '12AM', '13PM', '14PM', '15PM', '16PM','17PM','18PM','19PM','20PM'],
-    editText: [],
+    scheduleNo: null,
     time8: 'work',
     time9: 'work',
     time10: 'work',
@@ -297,10 +294,37 @@ export default {
     time18: 'work',
     time19: 'work',
     time20: 'work',
+    modify: []
   }),
+  computed: {
+    load() {
+      return this.get()
+    }
+  },
+  created() {
+    this.get()
+  },
   methods: {
-    addSchedule() {
-      this.$store.dispatch('schedule/addSchedule', {
+    get() {
+      this.modify = this.$store.getters['schedule/getExist']
+      this.scheduleNo = this.modify[0].scheduleNo
+      this.time8 = this.modify[0].time8
+      this.time9 = this.modify[0].time9
+      this.time10 =  this.modify[0].time10
+      this.time11 =  this.modify[0].time11
+      this.time12 =  this.modify[0].time12
+      this.time13 =  this.modify[0].time13
+      this.time14 =  this.modify[0].time14
+      this.time15 =  this.modify[0].time15
+      this.time16 =  this.modify[0].time16
+      this.time17 =  this.modify[0].time17
+      this.time18 =  this.modify[0].time18
+      this.time19 =  this.modify[0].time19
+      this.time20 =  this.modify[0].time20
+    },
+    modifySchedule() {
+      this.$store.dispatch('schedule/modifySchedule', {
+        scheduleNo: this.scheduleNo,
         email: localStorage.getItem('email'),
         name: localStorage.getItem('name'),
         team: localStorage.getItem('team'),

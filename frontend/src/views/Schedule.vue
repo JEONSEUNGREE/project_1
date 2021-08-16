@@ -9,7 +9,7 @@
 
 export default {
   components: {
-    ScheduleIndex:() => import('../components/schedule/Index.vue')
+    ScheduleIndex:() => import('../components/schedule/Index.vue'),
   }
 
 }

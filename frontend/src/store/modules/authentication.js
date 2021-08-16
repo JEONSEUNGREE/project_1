@@ -54,9 +54,12 @@ const mutations  = {
   SIGN_IN(state, payload) {
     axios.post('http://localhost:7777/authenticate/signin', payload)
       .then(res => {
-        const { errorMessage , email, name, team, auth } = res.data
+        alert(JSON.stringify(res.data))
 
-        state.email = email
+        const { errorMessage , email, name, team, auth } = res.data
+        state
+        // state.email = email
+
         if(errorMessage === 3) {
           localStorage.setItem('email',email)
           localStorage.setItem('name',name)

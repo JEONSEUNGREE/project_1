@@ -160,6 +160,7 @@ export default {
 
     get () {
       return this.$store.getters['project/getProject']
+
     },
     team() {
       return localStorage.getItem('team')
