@@ -21,24 +21,19 @@
       </span>
     </v-toolbar-title>
     <v-spacer />
-    <v-btn
-      icon
-      color="white"
-      class="ml-1"
-    >
-      <v-icon>mdi-calendar-month</v-icon>
-    </v-btn>
+    <date-picker app />
+
     <identity app />
   </v-app-bar>
 </template>
 
 <script>
-import Identity from './Identity/Identity.vue'
 
 export default {
   name: "AppBar",
   components: {
-    Identity
+    Identity:() => import('./Identity/Identity.vue'),
+    DatePicker:() => import('./datepicker/Datepicker.vue'),
   },
   computed: {
     drawer: {
