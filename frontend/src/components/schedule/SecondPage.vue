@@ -8,7 +8,7 @@
       flat
     >
       <v-row
-        v-for="(person, i) in Indivisualone"
+        v-for="(person, i) in getList"
         :key="i"
       >
         <v-col>
@@ -89,27 +89,17 @@
 <script>
 import TimeBarSecondPage from './TimeBarSecondPage.vue'
 
+
 export default {
   components: { TimeBarSecondPage },
-  data: () => ({
-    timetwo: [
-      {time: "14AM"},
-      {time: "15AM"},
-      {time: "16AM"},
-      {time: "17AM"},
-      {time: "18AM"},
-      {time: "19AM"},
-      {time: "20AM"},
-    ],
-    Indivisualone: [
-      {name: "REE", time8: "Woking", time9: "Practice", time10: "Studying"
-        ,time11: "Practice",time12: "Studying", time13: "13AM", time14: "Woking",time15: "Practice"
-        , time16: "Studying",time17: "Studying",time18: "practice", time19: "Studying",time20: "Studying" },
-      {name: "REE", time8: "Woking", time9: "Practice", time10: "Studying"
-        ,time11: "Practice",time12: "Studying", time13: "13AM", time14: "Woking",time15: "Practice"
-        , time16: "Studying",time17: "Studying",time18: "practice", time19: "Studying",time20: "Studying" },
-    ],
-  })
+  computed: {
+
+    getList() {
+      return this.$store.getters['schedule/getList']
+    }
+
+  }
+
 
 }
 </script>

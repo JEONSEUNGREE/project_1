@@ -5,6 +5,7 @@ import contact from './contact'
 import authentication from './authentication'
 import project from './project'
 import calendar from './calendar'
+import schedule from './schedule'
 
 export default {
   drawer,
@@ -13,5 +14,6 @@ export default {
   contact,
   authentication,
   project,
-  calendar
+  calendar,
+  schedule
 }

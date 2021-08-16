@@ -16,19 +16,18 @@
 </template>
 
 <script>
-export default {
-  data: () => ({
-    timetwo: [
-      {time: "14AM"},
-      {time: "15AM"},
-      {time: "16AM"},
-      {time: "17AM"},
-      {time: "18AM"},
-      {time: "19AM"},
-      {time: "20AM"},
-    ],
-  })
+import { mapState } from 'vuex'
 
+export default {
+
+  data: () => ({
+    name: 'TimebarSecondpage',
+  }),
+  computed: {
+    ...mapState('schedule', {
+      timetwo: 'timetwo'
+    })
+  }
 }
 </script>
 
