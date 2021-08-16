@@ -120,7 +120,6 @@ export default {
       //     this.modify = true
       //     alert(this.$store.getters['schedule/getModify'])
     }
-    // }
   },
 }
 </script>
