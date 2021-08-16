@@ -25,7 +25,7 @@ const mutations  = {
 
 }
 const actions = {
-  
+
   fetchBoard({ commit }) {
     axios.get('http://localhost:7777/board/fetch')
       .then(res => {
@@ -37,10 +37,9 @@ const actions = {
   },
 
   deleteBoard({ commit }, boardNo) {
-
     axios.delete(`http://localhost:7777/board/modify/${boardNo}`)
       .then(res => {
-        alert(res+ '삭제완료')
+        alert(res + '삭제완료')
         commit
       })
       .catch(err => {

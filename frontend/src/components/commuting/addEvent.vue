@@ -1,8 +1,9 @@
 <template>
   <v-container>
     <v-btn
-      color="grey--text white"
+      color="orange"
       dark
+      icon
       @click.stop="dialog = true"
     >
       New Event

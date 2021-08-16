@@ -1,16 +1,8 @@
 import axios from "axios"
 
 const state = {
-
-  typeToLabel: {
-    month: 'Month',
-    week: 'Week',
-    day: 'Day',
-    '4day': '4 Days',
-  },
-
+  
   events: [],
-
 
 }
 
