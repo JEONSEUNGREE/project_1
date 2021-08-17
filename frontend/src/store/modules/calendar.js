@@ -22,10 +22,14 @@ const actions = {
   addEvent({ commit }, payload) {
     axios.post('http://localhost:7777/calendar/add-calendar', payload)
       .then(res => {
+
         commit('snackBar/SET_SNACKBAR', {
           text: '등록완료' , color: 'black', location: 'bottom'
         }, { root: true } )
       })
+
+    commit('loading/SET_LOADING', {}, { root: true } )
+
       .catch(err => {
         alert('occur' + err)
         // snackbar
@@ -43,12 +47,12 @@ const actions = {
   },
 
   deleteCalendar({ commit }, eventNo) {
-    alert(eventNo)
     axios.delete(`http://localhost:7777/calendar/delete-calendar/${eventNo}`)
       .then(res => {
         commit('snackBar/SET_SNACKBAR', {
           text: '삭제완료' , color: 'black', location: 'bottom'
         }, { root: true } )
+        commit('loading/SET_LOADING', {}, { root: true } )
       })
       .catch(err => {
         console.log(err)

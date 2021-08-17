@@ -35,21 +35,24 @@ const actions = {
           text: '등록완료' , color: 'black', location: 'bottom'
         }, { root: true } )
       })
+    commit('loading/SET_LOADING', {}, { root: true } )
   },
+
   fetchProject({ commit }) {
     axios.get('http://localhost:7777/project/fetch-project')
       .then(res => {
         commit('FETCH_PROJECT', res.data)
       })
   },
+
   deleteProject({ commit }, value ) {
-    alert(value)
     axios.delete(`http://localhost:7777/project/delete-project/${value}`)
       .then(res => {
         commit('snackBar/SET_SNACKBAR', {
           text: '삭제완료' , color: 'black', location: 'bottom'
         }, { root: true } )
       })
+    commit('loading/SET_LOADING', {}, { root: true } )
 
   }
 }
