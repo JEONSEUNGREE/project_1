@@ -84,29 +84,26 @@ const mutations  = {
   //     })
   // },
 
-  SIGN_OUT(state) {
-    axios.post('http://localhost:7777/authenticate/logoutSession')
-      .then(res => {
-        alert(res)
-        if (res.data == '') {
+  // SIGN_OUT(state) {
+  //   axios.post('http://localhost:7777/authenticate/logoutSession')
+  //   state
+  //     .then(res => {
+  //       if (res.data == '') {
+  //         localStorage.removeItem('email')
+  //         localStorage.removeItem('name')
+  //         localStorage.removeItem('team')
 
-          localStorage.removeItem('email')
-          localStorage.removeItem('name')
-          localStorage.removeItem('team')
-
-          router.push('/')
-        } else {
-          alert('error')
-        }
-      }).catch(err => {
-        alert("로그아웃")
-        console.log(err)
-        localStorage.removeItem('email')
-        localStorage.removeItem('name')
-        localStorage.removeItem('team')
-        router.push('/')
-      })
-  }
+  //         router.push('/')
+  //       } else {
+  //         alert('error')
+  //       }
+  //     }).catch(err => {
+  //       localStorage.removeItem('email')
+  //       localStorage.removeItem('name')
+  //       localStorage.removeItem('team')
+  //       router.push('/')
+  //     })
+  // }
 
 
 
@@ -142,8 +139,11 @@ const actions = {
             text: '로그인 ', color: 'black', location: 'bottom'
           }, { root: true } )
 
+          commit('loading/SET_LOADING', {}, { root: true } )
+
           router.push('/home')
         } else if(errorMessage === 2) {
+
           commit('snackBar/SET_SNACKBAR', {
             text: '존재하지 않는 PW', color: 'black', location: 'bottom'
           }, { root: true } )
@@ -174,16 +174,20 @@ const actions = {
         } else {
           alert('error')
         }
+        commit('loading/SET_LOADING', {}, { root: true } )
+
       }).catch(err => {
         commit('snackBar/SET_SNACKBAR', {
           text: '로그아웃 ', color: 'black', location: 'top'
         }, { root: true } )
+        commit('loading/SET_LOADING', {}, { root: true } )
         console.log(err)
         localStorage.removeItem('email')
         localStorage.removeItem('name')
         localStorage.removeItem('team')
         router.push('/')
       })
+
   },
   // modifyUserInfor({ commit })
 

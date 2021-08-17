@@ -1,24 +1,39 @@
 <template>
-  <v-overlay :value="overlay">
+  <v-overlay
+    v-if="loading.overlay"
+    :value="overlay"
+  >
     <v-progress-circular
       indeterminate
-      size="64"
+      size="70"
     />
   </v-overlay>
 </template>
 
 <script>
+
+import { mapState } from 'vuex'
+
 export default {
   name: 'Loader',
   data: () => ({
-    overlay: false,
+    // overlay: false,
   }),
+  computed: {
+    ...mapState('loading', {
+      loading: 'loading'
+    }),
+    overlay () {
+      return this.endOverLay()
+    },
 
-  watch: {
-    overlay (val) {
-      val && setTimeout(() => {
-        this.overlay = false
-      }, 3000)
+  },
+  methods: {
+    endOverLay () {
+      setTimeout(() => {
+        this.$store.commit('loading/END_LOADING', '')
+        // this.loading.overlay = false
+      }, 1500)
     },
   },
 

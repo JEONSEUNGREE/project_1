@@ -41,9 +41,12 @@ const actions = {
     const { email, password } = payload
     axios.post('http://localhost:7777/userInfo/modify', { email, password })
       .then(res => {
+        commit('loading/SET_LOADING', {}, { root: true } )
+        
         commit('snackBar/SET_SNACKBAR', {
-          text: `수정완료 ${res.status}`, color: 'black', location: 'top'
+          text: `수정완료 ${res.status}`, color: 'black', location: 'bottom'
         }, { root: true } )
+
       })
   }
 

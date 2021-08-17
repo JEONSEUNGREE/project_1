@@ -42,6 +42,9 @@ const actions = {
         commit('snackBar/SET_SNACKBAR', {
           text: '삭제 ', color: 'black', location: 'bottom'
         }, { root: true } )
+
+        commit('loading/SET_LOADING', {}, { root: true } )
+
       })
       .catch(err => {
         console.log(err)
@@ -59,6 +62,7 @@ const actions = {
         commit('snackBar/SET_SNACKBAR', {
           text: '수정완료' , color: 'black', location: 'bottom'
         }, { root: true } )
+        commit('loading/SET_LOADING', {}, { root: true } )
       })
       .catch(err => {
         console.log(err)
@@ -74,6 +78,7 @@ const actions = {
           commit('snackBar/SET_SNACKBAR', {
             text: `등록완료 ${res.status}`, color: 'black', location: 'top'
           }, { root: true } )
+          commit('loading/SET_LOADING', {}, { root: true } )
         })
         .catch(err => {
           console.log(err.status)
