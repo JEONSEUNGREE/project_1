@@ -19,6 +19,16 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query("select m from Employee m where m.email = :email")
     Employee findInfo(String email);
 
+//   2번계산으로 ID/PW
+
+    @Query("select m from Employee m where m.name = :name")
+    Employee findEmployeeInfoName(String name);
+
+    @Query("select m from Employee m where m.phoneNumber = :phoneNumber")
+    Employee findEmployeeInfoPhoneNumber(String phoneNumber);
+
+
+
 //    @Query("delete e from Auth e where e.employeeNo = :employeeNo")
 //    Optional<Employee> findByAuthDelete(Long employeeNo);
 
