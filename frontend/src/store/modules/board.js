@@ -36,7 +36,7 @@ const actions = {
       })
   },
 
-  deleteBoard({ commit }, boardNo) {
+  deleteBoard({ commit, dispatch }, boardNo) {
     axios.delete(`http://localhost:7777/board/modify/${boardNo}`)
       .then(res => {
         commit('snackBar/SET_SNACKBAR', {
@@ -44,6 +44,8 @@ const actions = {
         }, { root: true } )
 
         commit('loading/SET_LOADING', {}, { root: true } )
+
+        dispatch('fetchBoard')
 
       })
       .catch(err => {
@@ -55,20 +57,23 @@ const actions = {
 
   },
 
-  modifyBoard({commit}, payload) {
+  modifyBoard({commit, dispatch}, payload) {
     const { boardNo, title, content } = payload
     axios.put(`http://localhost:7777/board/modify/${boardNo}`,{content, title})
       .then(res => {
         commit('snackBar/SET_SNACKBAR', {
           text: '수정완료' , color: 'black', location: 'bottom'
         }, { root: true } )
+
         commit('loading/SET_LOADING', {}, { root: true } )
+
+        dispatch('fetchBoard')
       })
       .catch(err => {
         console.log(err)
       })
   },
-  post({ commit }, payload ) {
+  post({ commit, dispatch }, payload ) {
     if (localStorage.getItem('name') != null) {
       const name = localStorage.getItem('name')
       const { title, content } = payload
@@ -78,7 +83,11 @@ const actions = {
           commit('snackBar/SET_SNACKBAR', {
             text: `등록완료 ${res.status}`, color: 'black', location: 'top'
           }, { root: true } )
+
           commit('loading/SET_LOADING', {}, { root: true } )
+          
+          dispatch('fetchBoard')
+
         })
         .catch(err => {
           console.log(err.status)

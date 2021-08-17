@@ -19,6 +19,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query("select m from Employee m where m.email = :email")
     Employee findInfo(String email);
 
+//    @Query("delete e from Auth e where e.employeeNo = :employeeNo")
+//    Optional<Employee> findByAuthDelete(Long employeeNo);
+
 //    @Query("select m.email, m.name, m.team, m.employeeNo, m.phoneNumber from Employee m")
 //    public List<Object[]> contactList();
 
