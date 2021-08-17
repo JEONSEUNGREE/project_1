@@ -31,8 +31,9 @@ const actions = {
   addProject({ commit }, payload) {
     axios.post('http://localhost:7777/project/add-project', payload)
       .then(res => {
-        alert("등록성공" + " " + res.status )
-        commit
+        commit('snackBar/SET_SNACKBAR', {
+          text: '등록완료' , color: 'black', location: 'bottom'
+        }, { root: true } )
       })
   },
   fetchProject({ commit }) {
@@ -45,8 +46,9 @@ const actions = {
     alert(value)
     axios.delete(`http://localhost:7777/project/delete-project/${value}`)
       .then(res => {
-        alert(res + "등록성공")
-        commit
+        commit('snackBar/SET_SNACKBAR', {
+          text: '삭제완료' , color: 'black', location: 'bottom'
+        }, { root: true } )
       })
 
   }

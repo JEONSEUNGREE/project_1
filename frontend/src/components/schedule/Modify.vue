@@ -2,7 +2,6 @@
   <v-row justify="center">
     <v-dialog
       v-model="dialog"
-      persistent
       max-width="800px"
     >
       <template v-slot:activator="{ on, attrs }">
@@ -342,19 +341,6 @@ export default {
         time19: this.time19,
         time20: this.time20,
       }),
-      time8 = 'work',
-      time9 = 'work',
-      time10 = 'work',
-      time11 = 'work',
-      time12 = 'work',
-      time13 = 'work',
-      time14 = 'work',
-      time15 = 'work',
-      time16 = 'work',
-      time17 = 'work',
-      time18 = 'work',
-      time19 = 'work',
-      time20 = 'work',
       this.dialog = false
     }
   }
