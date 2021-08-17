@@ -74,15 +74,8 @@
           class="ml-15"
           no-gutters
         >
-          <v-col class="ml-15">
-            <v-btn
-              class="ml-15"
-              color="primary"
-              text
-              small
-            >
-              ID/PW 찾기
-            </v-btn>
+          <v-col class="ml-16 mt-3">
+            <find />
           </v-col>
           <v-col class="mt-3 mr-10">
             <!-- 가입 -->
@@ -111,7 +104,8 @@
 export default {
 
   components: {
-    SignUp: () => import('../Signup.vue')
+    SignUp: () => import('../Signup.vue'),
+    Find: () => import('../Find.vue')
   },
   data: () => ({
     inheritAttrs: false,

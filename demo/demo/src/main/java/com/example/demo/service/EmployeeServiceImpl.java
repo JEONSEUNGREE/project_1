@@ -44,6 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Integer signin(EmployeeReceive employeeReceive) throws Exception {
 
         Optional<Employee> certifyEmp = employeeRepository.findByEmail(employeeReceive.getEmail());
+
         log.info("certifyEmp : " + certifyEmp);
 
         Object compare = Optional.empty();
@@ -58,8 +59,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         log.info("certifyEmp.get() : " + certifyEmp.get());
 
-        if (!passwordEncoder.matches(employeeReceive.getPassword(), signinEmp.getPassword()))
-        {
+//      임시비밀번호용
+
+        Employee tempPassword = employeeRepository.findInfo(employeeReceive.getEmail());
+
+//        log.info("db비번"+tempPassword.getPassword());
+//
+//        log.info("받은비번"+employeeReceive.getPassword());
+
+        if (tempPassword.getPassword().equals(employeeReceive.getPassword())) {
+            log.info("임시비밀번호 () ");
+            return 3;
+
+        } else if (!passwordEncoder.matches(employeeReceive.getPassword(), signinEmp.getPassword())) {
             log.info("비밀번호가 일치하지 않습니다.");
             return 2;
         }
@@ -85,5 +97,31 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void deleteEmployee(Long employeeNo) throws Exception {
         employeeRepository.deleteById(employeeNo);
+    }
+
+    @Override
+    public boolean checkEmailValidation(String email) throws Exception {
+        Optional<Employee> checkEmail = employeeRepository.findByEmail(email);
+
+        Object compare = Optional.empty();
+
+        if (checkEmail == compare)
+        {
+            log.info("login(): 사용가능한 이메일");
+            return false;
+        }
+
+        log.info("login(): 중복되는 이메일");
+        return true;
+    }
+
+    @Override
+    public Employee findEmployeeInfoname(String name) throws Exception {
+        return employeeRepository.findEmployeeInfoName(name);
+    }
+
+    @Override
+    public Employee findEmployeeInfoPhone(String phoneNumber) throws Exception {
+        return employeeRepository.findEmployeeInfoPhoneNumber(phoneNumber);
     }
 }

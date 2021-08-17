@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <v-container>
+      {{ check }}
       <v-card>
         <v-card-text>
           <validation-observer
@@ -23,6 +24,7 @@
                   :counter="15"
                 />
               </validation-provider>
+
               <validation-provider
                 v-slot="{ errors }"
                 :rules="{
@@ -71,21 +73,38 @@
                   :counter="11"
                 />
               </validation-provider>
-              <validation-provider
-                v-slot="{ errors }"
-                :rules="{
-                  required: true,
-                  email: true
-                }"
-                name="email"
-              >
-                <v-text-field
-                  v-model="email"
-                  label="E-Mail"
-                  name="email"
-                  :error-messages="errors"
-                />
-              </validation-provider>
+              <v-row no-gutters>
+                <v-col>
+                  <validation-provider
+                    v-slot="{ errors }"
+                    :rules="{
+                      required: true,
+                      email: true
+                    }"
+                    name="email"
+                  >
+                    <v-text-field
+                      v-model="email"
+                      label="E-Mail"
+                      name="email"
+                      :error-messages="errors"
+                    />
+                  </validation-provider>
+                </v-col>
+                <v-col
+                  align-self="center"
+                  class="ml-3"
+                >
+                  <v-btn
+                    class="mr-3"
+                    :disabled="email == null"
+                    text
+                    @click="checkDuplicate"
+                  >
+                    중복검사
+                  </v-btn>
+                </v-col>
+              </v-row>
               <validation-provider
                 v-slot="{ errors }"
                 label="Select"
@@ -173,9 +192,17 @@ export default {
       items: 'items',
       roles: 'roles'
     }),
+    check() {
+      return this.checkSate()
+    }
   },
 
   methods: {
+    checkSate() {
+      if(this.$store.getters['authentication/getCheckDuplicate']) {
+        this.email = null
+      }
+    },
 
     submit() {
       this.$refs.observer.validate().then(result => {
@@ -191,6 +218,12 @@ export default {
         }
         this.clear()
         this.$emit('change')
+      })
+    },
+
+    checkDuplicate() {
+      this.$store.dispatch('authentication/checkDuplicate', {
+        email: this.email
       })
     },
 

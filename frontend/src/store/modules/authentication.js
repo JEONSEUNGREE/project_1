@@ -21,7 +21,7 @@ const state = {
     {text: '관리자', value: 'admin'},
     {text: '직원', value: 'emp'},
   ],
-
+  checkDuplicate: false
 
 }
 
@@ -29,12 +29,16 @@ const getters = {
 //로컬로 저장 새로고침시 정보가 사라짐
   // getEmpInfo: state => state.empInfo.name,
   // getEmpDepart: state => state.empInfo.team,
-  getRole: state => state.role
+  getRole: state => state.role,
+  getCheckDuplicate: state => state.checkDuplicate
 
 }
 
 const mutations  = {
-// state 안쓰면 state만 읽어옴 애초에 처음 오는 파라미터는 무조건 state로 읽음
+  CHECK_DUPLICATE(state, value) {
+    state.checkDuplicate = value
+  }
+  // state 안쓰면 state만 읽어옴 애초에 처음 오는 파라미터는 무조건 state로 읽음
   // REGISTER(state, payload) {
   //   state
   //   axios.post('http://localhost:7777/authenticate/signup', payload)
@@ -105,13 +109,12 @@ const mutations  = {
   //     })
   // }
 
-
-
 }
 const actions = {
   register({ commit }, payload){
     axios.post('http://localhost:7777/authenticate/signup', payload)
       .then(res => {
+        alert(res.data)
         commit('snackBar/SET_SNACKBAR', {
           text: '가입완료 ', color: 'black', location: 'bottom'
         }, { root: true } )
@@ -159,6 +162,57 @@ const actions = {
         // snackbar
       })
   },
+  checkDuplicate({ commit }, payload) {
+    axios.post('http://localhost:7777/authenticate/check-duplicate', payload)
+      .then(res => {
+        if(res.data == true) {
+          commit('CHECK_DUPLICATE', res.data)
+
+          commit('snackBar/SET_SNACKBAR', {
+            text: '중복되는 이메일입니다', color: 'black', location: 'bottom'
+          }, { root: true } )
+        } else {
+          commit('snackBar/SET_SNACKBAR', {
+            text: '사용가능한 이메일 입니다..', color: 'black', location: 'bottom'
+          }, { root: true } )
+
+        }
+
+      }
+      ).catch(err => {
+        alert(err+ "에러")
+      })
+
+
+  },
+
+  findAccount({ commit }, payload) {
+    axios.post('http://localhost:7777/authenticate/find-account', payload)
+      .then(res => {
+
+        if (res.data != "") {
+
+          commit('snackBar/SET_SNACKBAR', {
+            text: `email은 ${JSON.stringify(res.data.email)}
+            임시비밀번호는' ${JSON.stringify(res.data.password)}`,
+            color: 'black', location: 'top'
+          }, { root: true } )
+
+        }else {
+
+          commit('snackBar/SET_SNACKBAR', {
+            text: '잘못된 정보입니다. ', color: 'black', location: 'top'
+          }, { root: true } )
+
+        }
+      })
+      .catch(err => {
+        alert(err.data)
+      })
+
+  },
+
+
   signout({ commit }) {
     axios.post('http://localhost:7777/authenticate/logoutSession')
       .then(res => {
