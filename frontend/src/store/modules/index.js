@@ -6,6 +6,8 @@ import authentication from './authentication'
 import project from './project'
 import calendar from './calendar'
 import schedule from './schedule'
+import snackBar from './snackBar'
+import loading from './loading'
 
 export default {
   drawer,
@@ -15,5 +17,7 @@ export default {
   authentication,
   project,
   calendar,
-  schedule
+  schedule,
+  snackBar,
+  loading
 }

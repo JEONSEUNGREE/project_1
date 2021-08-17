@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const state = {
-  
+
   events: [],
 
 }
@@ -19,13 +19,19 @@ const mutations  = {
 
 const actions = {
 
-  addEvent({ commit }, payload) {
+  addEvent({ commit, dispatch }, payload) {
     axios.post('http://localhost:7777/calendar/add-calendar', payload)
       .then(res => {
-        alert('등록완료' + res.status)
-        commit
-        // snackbar
+
+        commit('snackBar/SET_SNACKBAR', {
+          text: '등록완료' , color: 'black', location: 'bottom'
+        }, { root: true } )
+
+        dispatch('fetchCalendar')
       })
+
+    commit('loading/SET_LOADING', {}, { root: true } )
+
       .catch(err => {
         alert('occur' + err)
         // snackbar
@@ -42,12 +48,15 @@ const actions = {
       })
   },
 
-  deleteCalendar({ commit }, eventNo) {
-    alert(eventNo)
+  deleteCalendar({ commit, dispatch }, eventNo) {
     axios.delete(`http://localhost:7777/calendar/delete-calendar/${eventNo}`)
       .then(res => {
-        alert(res+ '삭제완료')
-        commit
+        
+        commit('snackBar/SET_SNACKBAR', {
+          text: '삭제완료' , color: 'black', location: 'bottom'
+        }, { root: true } )
+        commit('loading/SET_LOADING', {}, { root: true } )
+        dispatch('fetchCalendar')
       })
       .catch(err => {
         console.log(err)

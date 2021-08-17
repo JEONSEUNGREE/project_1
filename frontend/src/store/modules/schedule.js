@@ -47,12 +47,14 @@ const mutations  = {
 
 const actions = {
 
-  addSchedule({ commit }, payload) {
+  addSchedule({ commit, dispatch }, payload) {
     alert(JSON.stringify(payload))
     axios.post('http://localhost:7777/schedule/add-schedule', payload)
       .then(res => {
-        alert("등록성공" + " " + res.status )
-        commit
+        commit('snackBar/SET_SNACKBAR', {
+          text: '등록완료' , color: 'black', location: 'bottom'
+        }, { root: true } )
+        dispatch('fetchSchedule')
       })
   },
   fetchSchedule({ commit }) {
@@ -65,17 +67,18 @@ const actions = {
         console.log(err.status)
       })
   },
-  modifySchedule({commit}, payload) {
+  modifySchedule({ commit, dispatch }, payload) {
     const { scheduleNo, time8, time9, time10, time11, time12, time13
       ,time14, time15, time16, time17, time18, time19, time20 } = payload
-    alert(JSON.stringify(payload))
     axios.put(`http://localhost:7777/schedule/modify/${scheduleNo}`,
       { time8, time9, time10, time11, time12, time13
         ,time14, time15, time16, time17, time18, time19, time20}
     )
       .then(res => {
-        alert(res.data + "수정완료 ")
-        commit
+        commit('snackBar/SET_SNACKBAR', {
+          text: '등록완료' , color: 'black', location: 'bottom'
+        }, { root: true } )
+        dispatch('fetchSchedule')
       })
       .catch(err => {
         console.log(err)

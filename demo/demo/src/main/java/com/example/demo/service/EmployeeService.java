@@ -15,6 +15,17 @@ public interface EmployeeService {
 
     public Employee findInfo(String email) throws Exception;
 
+//    public void deleteAuth(Long employeeNo) throws Exception;
+
+    public void deleteEmployee(Long employeeNo) throws Exception;
+
+    public boolean checkEmailValidation(String email) throws Exception;
+
+
+    public Employee findEmployeeInfoname(String name) throws Exception;
+
+    public Employee findEmployeeInfoPhone(String phoneNumber) throws Exception;
+
 
 
 }

@@ -28,26 +28,36 @@ const actions = {
   getSort({ commit }, value) {
     commit('GET_SORT', value)
   },
-  addProject({ commit }, payload) {
+  addProject({ commit, dispatch }, payload) {
     axios.post('http://localhost:7777/project/add-project', payload)
       .then(res => {
-        alert("등록성공" + " " + res.status )
-        commit
+        commit('snackBar/SET_SNACKBAR', {
+          text: '등록완료' , color: 'black', location: 'bottom'
+        }, { root: true } )
+        
+        dispatch('fetchProject')
+
       })
+    commit('loading/SET_LOADING', {}, { root: true } )
+    dispatch('fetchProject')
   },
+
   fetchProject({ commit }) {
     axios.get('http://localhost:7777/project/fetch-project')
       .then(res => {
         commit('FETCH_PROJECT', res.data)
       })
   },
-  deleteProject({ commit }, value ) {
-    alert(value)
+
+  deleteProject({ commit, dispatch }, value ) {
     axios.delete(`http://localhost:7777/project/delete-project/${value}`)
       .then(res => {
-        alert(res + "등록성공")
-        commit
+        commit('snackBar/SET_SNACKBAR', {
+          text: '삭제완료' , color: 'black', location: 'bottom'
+        }, { root: true } )
+        dispatch('fetchProject')
       })
+    commit('loading/SET_LOADING', {}, { root: true } )
 
   }
 }

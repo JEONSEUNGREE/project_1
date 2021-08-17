@@ -58,6 +58,13 @@
     <v-card-actions>
       <v-spacer />
       <v-btn
+        text
+        color="error"
+        @click="deleteAccount"
+      >
+        Delete Account
+      </v-btn>
+      <v-btn
         color="primary"
         text
         @click="change"
@@ -98,6 +105,13 @@ export default {
           password:this.password, email:localStorage.getItem('email')
         }
       )
+    },
+    deleteAccount() {
+      const infor = localStorage.getItem('email')
+      this.$store.dispatch('userInfor/deleteAcoount',
+        {
+          email: infor,
+        })
     }
   }
 }

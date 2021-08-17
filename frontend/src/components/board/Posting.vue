@@ -123,7 +123,7 @@ export default {
       const result = await this.$refs.observer.validate()
 
       if( result ) {
-        this.$store.dispatch('userInfor/post',
+        this.$store.dispatch('board/post',
           { title: this.title, content: this.content }
         )
         this.dialog = false

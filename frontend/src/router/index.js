@@ -68,9 +68,8 @@ const routes = [
     path: "/",
     name: 'Signin',
     component: () =>import('../views/authentication/Signin')
+  },
 
-
-  }
 ]
 
 const router = new VueRouter({
