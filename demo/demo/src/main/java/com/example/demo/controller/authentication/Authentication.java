@@ -3,8 +3,10 @@ package com.example.demo.controller.authentication;
 
 import com.example.demo.controller.authentication.session.UserInfo;
 import com.example.demo.entity.Employee;
-import com.example.demo.repository.EmployeeRepository;
+import com.example.demo.repository.*;
+import com.example.demo.repository.receive.DeleteEmail;
 import com.example.demo.repository.receive.EmployeeReceive;
+import com.example.demo.service.CalendarService;
 import com.example.demo.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
@@ -29,6 +31,16 @@ public class Authentication {
 
     @Autowired
     EmployeeService employeeService;
+
+    @Autowired
+    AuthRepository authRepository;
+
+    @Autowired
+    CalendarRepository calendarRepository;
+
+    @Autowired
+    ScheduleRepository scheduleRepository;
+
 
     private HttpSession session;
 
@@ -100,6 +112,17 @@ public class Authentication {
         return new ResponseEntity<Optional>(mustNull, HttpStatus.OK);
     }
 
+    @PostMapping("/delete-account")
+    public ResponseEntity<DeleteEmail> deleteEmployee(@RequestBody DeleteEmail deleteEmail) throws Exception {
 
+        log.info("log" + deleteEmail.toString());
 
+        Employee employeeEntity =  employeeService.findInfo(deleteEmail.getEmail());
+
+        authRepository.deleteById(employeeEntity.getEmployeeNo());
+
+        employeeService.deleteEmployee(employeeEntity.getEmployeeNo());
+
+        return new ResponseEntity<DeleteEmail>(HttpStatus.OK);
+    }
 }

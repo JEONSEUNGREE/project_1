@@ -42,6 +42,22 @@
               <validation-provider
                 v-slot="{ errors }"
                 :rules="{
+                  confirmed: 'password',
+                  required: true,
+                }"
+                name="passwordConfirm"
+              >
+                <v-text-field
+                  v-model="passwordConfirm"
+                  label="passwordConfirm"
+                  :error-messages="errors"
+                  :counter="25"
+                  type="password"
+                />
+              </validation-provider>
+              <validation-provider
+                v-slot="{ errors }"
+                :rules="{
                   required: true,
                   numeric: true,
                   digits: 11
@@ -149,6 +165,7 @@ export default {
     checkbox: null,
     team: null,
     auth: null,
+    passwordConfirm: null
 
   }),
   computed: {

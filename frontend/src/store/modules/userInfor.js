@@ -1,4 +1,5 @@
 import axios from "axios"
+import router from "../../router"
 
 const state = {
   infor: [
@@ -41,15 +42,24 @@ const actions = {
     const { email, password } = payload
     axios.post('http://localhost:7777/userInfo/modify', { email, password })
       .then(res => {
-        commit('loading/SET_LOADING', {}, { root: true } )
-        
+
         commit('snackBar/SET_SNACKBAR', {
           text: `수정완료 ${res.status}`, color: 'black', location: 'bottom'
         }, { root: true } )
 
       })
-  }
+  },
+  deleteAcoount({ commit }, payload) {
+    axios.post('http://localhost:7777/authenticate/delete-account', payload)
 
+      .then(res => {
+
+        commit('snackBar/SET_SNACKBAR', {
+          text: `탈퇴완료 ${res.status}`, color: 'black', location: 'bottom'
+        }, { root: true } )
+        router.push('/')
+      })
+  }
 }
 
 export default {

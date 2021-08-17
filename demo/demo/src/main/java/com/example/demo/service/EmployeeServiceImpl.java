@@ -76,4 +76,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee findInfo(String email) throws Exception {
         return employeeRepository.findInfo(email);
     }
+
+//    @Override
+//    public void deleteAuth(Long employeeNo) throws Exception {
+//        employeeRepository.findByAuthDelete(employeeNo);
+//    }
+
+    @Override
+    public void deleteEmployee(Long employeeNo) throws Exception {
+        employeeRepository.deleteById(employeeNo);
+    }
 }
