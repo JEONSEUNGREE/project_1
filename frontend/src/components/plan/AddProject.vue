@@ -123,8 +123,8 @@ export default {
       status: 'status'
     })
   },
-  methods: {
 
+  methods: {
     submit() {
       if (this.$refs.form.validate()) {
         this.loading = true;

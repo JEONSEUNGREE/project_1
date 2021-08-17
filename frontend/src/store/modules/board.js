@@ -39,25 +39,48 @@ const actions = {
   deleteBoard({ commit }, boardNo) {
     axios.delete(`http://localhost:7777/board/modify/${boardNo}`)
       .then(res => {
-        alert(res + '삭제완료')
-        commit
+        commit('snackBar/SET_SNACKBAR', {
+          text: '삭제 ', color: 'black', location: 'bottom'
+        }, { root: true } )
       })
       .catch(err => {
         console.log(err)
+        commit(`snackBar/SET_SNACKBAR ${err}`, {
+          text: '오류 ', color: 'black', location: 'bottom'
+        }, { root: true } )
       })
+
   },
 
   modifyBoard({commit}, payload) {
     const { boardNo, title, content } = payload
     axios.put(`http://localhost:7777/board/modify/${boardNo}`,{content, title})
       .then(res => {
-        alert(res.data + "수정완료 ")
-        commit
+        commit('snackBar/SET_SNACKBAR', {
+          text: '수정완료' , color: 'black', location: 'bottom'
+        }, { root: true } )
       })
       .catch(err => {
         console.log(err)
       })
-  }
+  },
+  post({ commit }, payload ) {
+    if (localStorage.getItem('name') != null) {
+      const name = localStorage.getItem('name')
+      const { title, content } = payload
+
+      axios.post('http://localhost:7777/board/post', { title: title, content: content, writer: name })
+        .then(res => {
+          commit('snackBar/SET_SNACKBAR', {
+            text: `등록완료 ${res.status}`, color: 'black', location: 'top'
+          }, { root: true } )
+        })
+        .catch(err => {
+          console.log(err.status)
+          alert("에러")
+        })
+    }
+  },
 
 
 }
