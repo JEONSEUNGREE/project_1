@@ -48,7 +48,6 @@ const mutations  = {
 const actions = {
 
   addSchedule({ commit, dispatch }, payload) {
-    alert(JSON.stringify(payload))
     axios.post('http://localhost:7777/schedule/add-schedule', payload)
       .then(res => {
         commit('snackBar/SET_SNACKBAR', {

@@ -1,7 +1,7 @@
 <template>
   <v-overlay
     v-if="loading.overlay"
-    :value="overlay"
+    :value="overlay()"
   >
     <v-progress-circular
       indeterminate
@@ -18,24 +18,28 @@ export default {
   name: 'Loader',
   data: () => ({
     // overlay: false,
+    time: 1000
   }),
   computed: {
     ...mapState('loading', {
-      loading: 'loading'
+      loading: 'loading',
     }),
-    overlay () {
-      return this.endOverLay()
-    },
+
+    // overlay () {
+    //   console.log("실행여부")
+    //   return this.endOverLay()
+    // },
 
   },
+
   methods: {
-    endOverLay () {
+    overlay () {
+      console.log("실행여부")
       setTimeout(() => {
-        this.$store.commit('loading/END_LOADING', '')
-        // this.loading.overlay = false
-      }, 1500)
+        this.$store.commit('loading/END_LOADING')
+      }, 2000)
     },
-  },
+  }
 
 }
 </script>

@@ -114,14 +114,14 @@ const actions = {
   register({ commit }, payload){
     axios.post('http://localhost:7777/authenticate/signup', payload)
       .then(res => {
-        alert(res.data)
         commit('snackBar/SET_SNACKBAR', {
           text: '가입완료 ', color: 'black', location: 'bottom'
         }, { root: true } )
       })
       .catch(err => {
-        alert('occur' + err)
-        // snackbar
+        commit('snackBar/SET_SNACKBAR', {
+          text: '중복된 email입니다.', color: 'black', location: 'top'
+        }, { root: true } )
       })
 
   },
@@ -172,6 +172,8 @@ const actions = {
             text: '중복되는 이메일입니다', color: 'black', location: 'bottom'
           }, { root: true } )
         } else {
+          commit('CHECK_DUPLICATE', false)
+
           commit('snackBar/SET_SNACKBAR', {
             text: '사용가능한 이메일 입니다..', color: 'black', location: 'bottom'
           }, { root: true } )

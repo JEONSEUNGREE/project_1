@@ -1,9 +1,8 @@
 const state = {
-  loading: { overlay: false }
+  loading: { overlay: false },
 }
 
 const getters = {
-
 
 }
 const mutations  = {

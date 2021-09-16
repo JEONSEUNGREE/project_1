@@ -30,7 +30,6 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework.session/spring-session-core
 	implementation group: 'org.springframework.session', name: 'spring-session-core', version: '2.5.1'
 
-	implementation 'org.json:json:20190722'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
