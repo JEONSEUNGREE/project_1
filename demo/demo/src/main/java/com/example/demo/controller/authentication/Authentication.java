@@ -11,8 +11,8 @@ import com.example.demo.service.CalendarService;
 import com.example.demo.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
-import org.json.JSONArray;
-import org.json.JSONObject;
+//import org.json.JSONArray;
+//import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,7 +57,14 @@ public class Authentication {
     public ResponseEntity<Void> signup(@RequestBody EmployeeReceive employeeReceive) throws Exception {
         log.info("EmployeeReceive" + employeeReceive.toString());
 
-            employeeService.signup(employeeReceive);
+        Boolean checkDuplicate = employeeService.checkEmailValidation(employeeReceive.getEmail());
+
+            if (checkDuplicate) {
+                throw new Exception("중복이메일입니다.");
+            }
+
+        employeeService.signup(employeeReceive);
+
 
         return new ResponseEntity<Void> (HttpStatus.OK);
     }
@@ -149,7 +156,6 @@ public class Authentication {
 
         Employee PhoneNumber = new Employee();
         Employee name = new Employee();
-
 
         try {
             PhoneNumber = employeeService.findEmployeeInfoPhone(employee.getPhoneNumber());

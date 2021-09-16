@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-container>
-      {{ check }}
+      <!-- {{ check }} -->
       <v-card>
         <v-card-text>
           <validation-observer
@@ -192,9 +192,9 @@ export default {
       items: 'items',
       roles: 'roles'
     }),
-    check() {
-      return this.checkSate()
-    }
+    // check() {
+    //   return this.checkSate()
+    // }
   },
 
   methods: {
@@ -231,6 +231,7 @@ export default {
       this.name = null
       this.phoneNumber = null
       this.password = null
+      this.passwordConfirm = null
       this.email = null
       this.checkbox = null
       this.team = null
